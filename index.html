@@ -1,0 +1,1129 @@
+<!DOCTYPE html>
+<html class="dark" lang="id">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Elite Vanguard Control Center V2 - Admin Dashboard</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#f98006",
+                        "background-light": "#f5f5f5",
+                        "background-dark": "#0a0a0a",
+                        "card-dark": "#ffffff",
+                        "card-light": "#ffffff",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"],
+                        "mono": ["JetBrains Mono", "monospace"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .inner-glow-orange {
+                box-shadow: inset 0 0 15px rgba(249, 128, 6, 0.05);
+            }
+            .orange-glow-pip {
+                box-shadow: 0 0 12px rgba(249, 128, 6, 0.9);
+            }
+            .metallic-gradient {
+                background: linear-gradient(135deg, #f98006 0%, #ffcc33 50%, #f98006 100%);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
+            .orange-laser-line {
+                box-shadow: 0 0 8px rgba(249, 128, 6, 0.4);
+            }
+            .sidebar-item-active {
+                @apply bg-primary/10 border-r-2 border-primary text-gray-900;
+            }
+            .scrollbar-hide::-webkit-scrollbar {
+                display: none;
+            }
+            .clock-glow {
+                text-shadow: 0 0 10px rgba(249, 128, 6, 0.6), 0 0 20px rgba(249, 128, 6, 0.2);
+            }
+            .volume-filter-btn {
+                @apply px-3 py-1.5 text-[9px] font-bold uppercase tracking-wider rounded-lg border border-gray-300 bg-gray-50 text-gray-600 hover:bg-gray-100 hover:border-gray-400 transition-all flex items-center gap-1;
+            }
+            .volume-filter-btn.active {
+                @apply bg-primary text-white border-primary;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-background-light font-display text-gray-900 transition-colors duration-300 antialiased overflow-hidden">
+    <div class="flex h-screen w-full">
+        <!-- Sidebar -->
+        <aside class="w-72 border-r border-primary/30 bg-white/90 backdrop-blur-xl flex flex-col z-50 shadow-lg">
+            <div class="p-8">
+                <div class="flex items-center gap-3">
+                    <div class="size-8 flex items-center justify-center">
+                        <svg class="w-full h-full" fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <linearGradient id="logoGrad" x1="0%" x2="100%" y1="0%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#f98006;stop-opacity:1"></stop>
+                                    <stop offset="100%" style="stop-color:#ffcc33;stop-opacity:1"></stop>
+                                </linearGradient>
+                            </defs>
+                            <path
+                                d="M47.2426 24L24 47.2426L0.757355 24L24 0.757355L47.2426 24ZM12.2426 21H35.7574L24 9.24264L12.2426 21Z"
+                                fill="url(#logoGrad)"></path>
+                        </svg>
+                    </div>
+                    <h2 class="text-xl font-extrabold tracking-tighter metallic-gradient">ND GROUP</h2>
+                </div>
+                <p class="mt-2 text-[10px] text-gray-600 uppercase tracking-[0.4em] font-bold">Vanguard V2</p>
+            </div>
+
+            <nav class="flex-1 px-4 space-y-2 mt-4">
+                <a class="flex items-center gap-4 px-4 py-3 text-sm font-bold tracking-widest uppercase transition-all sidebar-item-active group"
+                    href="index.html">
+                    <span
+                        class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">dashboard_customize</span>
+                    Dashboard
+                </a>
+                <a class="flex items-center gap-4 px-4 py-3 text-sm font-medium tracking-widest uppercase text-gray-600 hover:text-gray-900 hover:bg-gray-100 transition-all group"
+                    href="admin-management.html">
+                    <span
+                        class="material-symbols-outlined text-slate-500 group-hover:text-primary transition-colors">admin_panel_settings</span>
+                    Kelola Admin
+                </a>
+                <a class="flex items-center gap-4 px-4 py-3 text-sm font-medium tracking-widest uppercase text-gray-600 hover:text-gray-900 hover:bg-gray-100 transition-all group"
+                    href="kasir.html">
+                    <span
+                        class="material-symbols-outlined text-slate-500 group-hover:text-primary transition-colors">point_of_sale</span>
+                    Kelola Kasir
+                </a>
+                <a class="flex items-center gap-4 px-4 py-3 text-sm font-medium tracking-widest uppercase text-gray-600 hover:text-gray-900 hover:bg-gray-100 transition-all group"
+                    href="kupon.html">
+                    <span
+                        class="material-symbols-outlined text-slate-500 group-hover:text-primary transition-colors">confirmation_number</span>
+                    Kelola Kupon
+                </a>
+                <a class="flex items-center gap-4 px-4 py-3 text-sm font-medium tracking-widest uppercase text-gray-600 hover:text-gray-900 hover:bg-gray-100 transition-all group"
+                    href="voucher.html">
+                    <span
+                        class="material-symbols-outlined text-slate-500 group-hover:text-primary transition-colors">loyalty</span>
+                    Kelola Voucher
+                </a>
+                <a class="flex items-center gap-4 px-4 py-3 text-sm font-medium tracking-widest uppercase text-gray-600 hover:text-gray-900 hover:bg-gray-100 transition-all group"
+                    href="export.html">
+                    <span
+                        class="material-symbols-outlined text-slate-500 group-hover:text-primary transition-colors">download</span>
+                    Export Data
+                </a>
+            </nav>
+
+            <div class="p-6 border-t border-gray-200 space-y-4">
+                <div class="space-y-1.5">
+                    <label class="text-[9px] font-bold uppercase tracking-widest text-gray-600 ml-1">Filter Source
+                        Store</label>
+                    <div class="relative group">
+                        <select id="storeFilter"
+                            class="w-full bg-white border border-gray-300 rounded px-3 py-2 text-[10px] font-bold text-gray-900 uppercase tracking-wider focus:ring-1 focus:ring-primary focus:border-primary outline-none appearance-none cursor-pointer">
+                            <option value="all">ALL STORES [SYSTEM]</option>
+                        </select>
+                        <span
+                            class="material-symbols-outlined absolute right-2 top-1/2 -translate-y-1/2 text-primary text-sm pointer-events-none">expand_more</span>
+                    </div>
+                </div>
+                <div class="space-y-2">
+                    <button onclick="exportExcel('SEDANG')"
+                        class="w-full flex items-center justify-between gap-3 px-4 py-3 rounded border border-primary/30 bg-primary/5 hover:bg-primary/10 transition-all group overflow-hidden relative">
+                        <span class="text-[10px] font-bold uppercase tracking-widest text-primary">Export Hadiah
+                            Kecil</span>
+                        <span
+                            class="material-symbols-outlined text-lg text-primary orange-glow-pip rounded-full p-1 bg-primary/20">download</span>
+                    </button>
+                    <button onclick="exportExcel('BESAR')"
+                        class="w-full flex items-center justify-between gap-3 px-4 py-3 rounded border border-primary/30 bg-primary/5 hover:bg-primary/10 transition-all group overflow-hidden relative">
+                        <span class="text-[10px] font-bold uppercase tracking-widest text-primary">Export Hadiah
+                            Besar</span>
+                        <span
+                            class="material-symbols-outlined text-lg text-primary orange-glow-pip rounded-full p-1 bg-primary/20">ios_share</span>
+                    </button>
+                </div>
+                <button onclick="logout()"
+                    class="w-full flex items-center justify-center gap-2 px-4 py-2 rounded border border-red-500/30 bg-red-500/10 hover:bg-red-500/20 transition-all text-red-400 hover:text-red-300">
+                    <span class="material-symbols-outlined text-sm">logout</span>
+                    <span class="text-[10px] font-bold uppercase tracking-widest">Logout</span>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 overflow-y-auto scrollbar-hide flex flex-col">
+            <!-- Header -->
+            <header
+                class="sticky top-0 z-40 flex items-center justify-between border-b border-gray-200 bg-white/90 px-10 py-5 backdrop-blur-md shadow-sm">
+                <div class="flex items-center gap-8">
+                    <h1 class="text-2xl font-black italic tracking-tighter uppercase text-gray-900">Vanguard<span
+                            class="text-primary not-italic font-light ml-2">Terminal</span></h1>
+                    <div class="h-6 w-px bg-gray-300"></div>
+                    <div class="flex items-center gap-8">
+                        <div class="flex items-center gap-3">
+                            <span class="h-2 w-2 rounded-full bg-primary animate-ping"></span>
+                            <span class="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-700">System Link:
+                                Stable</span>
+                        </div>
+                        <div class="flex flex-col border-l border-primary/20 pl-8">
+                            <div class="flex items-center gap-2">
+                                <span class="text-[8px] font-black uppercase tracking-[0.3em] text-gray-600">Network
+                                    Time</span>
+                                <div class="h-[1px] w-4 bg-primary/30"></div>
+                            </div>
+                            <div class="flex items-baseline gap-2 font-mono clock-glow">
+                                <span class="text-xl font-bold text-primary tracking-wider"
+                                    id="vanguard-clock">00:00:00</span>
+                                <span class="text-[10px] font-bold text-primary/80 uppercase tracking-widest"
+                                    id="vanguard-date">JAN 01 2026</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex items-center gap-6">
+                    <div class="relative">
+                        <span
+                            class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 text-sm">search</span>
+                        <input id="terminalSearch"
+                            class="w-64 rounded bg-gray-100 border border-gray-300 py-2 pl-10 pr-4 text-[10px] tracking-widest uppercase text-gray-900 focus:ring-1 focus:ring-primary focus:border-primary transition-all"
+                            placeholder="TERMINAL SEARCH..." type="text" />
+                    </div>
+                    <div class="flex gap-2">
+                        <button id="notificationBtn"
+                            class="flex size-9 items-center justify-center rounded border border-gray-300 bg-gray-100 text-gray-600 hover:text-primary transition-colors relative">
+                            <span class="material-symbols-outlined text-[18px]">notifications</span>
+                            <span id="notificationBadge"
+                                class="absolute -top-1 -right-1 h-4 w-4 bg-primary text-white text-[8px] font-bold rounded-full flex items-center justify-center hidden">0</span>
+                        </button>
+                        <button id="settingsBtn"
+                            class="flex size-9 items-center justify-center rounded border border-gray-300 bg-gray-100 text-gray-600 hover:text-primary transition-colors">
+                            <span class="material-symbols-outlined text-[18px]">settings</span>
+                        </button>
+                    </div>
+                    <div class="flex items-center gap-3 pl-4 border-l border-gray-300">
+                        <div class="text-right">
+                            <p class="text-[10px] font-bold text-gray-900 tracking-widest uppercase"
+                                id="headerUserName">
+                                Admin</p>
+                            <p class="text-[9px] text-primary uppercase font-bold tracking-tighter">Level 4 Access</p>
+                        </div>
+                        <div
+                            class="h-10 w-10 rounded-full border border-primary/40 p-0.5 bg-primary/20 flex items-center justify-center">
+                            <span class="text-primary font-bold text-sm" id="headerUserAvatar">A</span>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <div class="p-10 space-y-8">
+                <!-- Advanced Filter Section -->
+                <div class="rounded-xl border border-gray-200 bg-white p-1 shadow-sm overflow-hidden">
+                    <div
+                        class="bg-gradient-to-r from-primary/10 via-transparent to-transparent border-b border-primary/20 px-6 py-4 flex items-center justify-between">
+                        <div class="flex items-center gap-3">
+                            <span class="material-symbols-outlined text-primary">troubleshoot</span>
+                            <h3 class="text-[11px] font-black uppercase tracking-[0.3em] text-gray-900">Advanced Filter
+                                &
+                                Control Center</h3>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <span class="text-[9px] font-bold text-gray-700 uppercase tracking-widest">Targeting:
+                                Single NIK Mode</span>
+                            <div class="h-1 w-12 bg-primary/20 rounded-full overflow-hidden">
+                                <div class="h-full w-1/2 bg-primary animate-pulse"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-8 grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
+                        <div class="lg:col-span-8 space-y-3">
+                            <label
+                                class="block text-[10px] font-bold uppercase tracking-[0.2em] text-primary/80 ml-1">Cari
+                                NIK...</label>
+                            <div class="relative group">
+                                <div class="absolute inset-y-0 left-0 flex items-center pl-5 pointer-events-none">
+                                    <span
+                                        class="material-symbols-outlined text-primary text-2xl orange-glow-pip rounded-full bg-primary/10 p-1">search</span>
+                                </div>
+                                <input id="nikSearch"
+                                    class="block w-full bg-gray-50 border border-gray-300 rounded-lg py-5 pl-16 pr-6 text-xl font-bold tracking-[0.1em] text-gray-900 placeholder:text-gray-400 focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all outline-none"
+                                    placeholder="3275XXXXXXXXXXXXXXXX" type="text" />
+                                <div class="absolute right-4 top-1/2 -translate-y-1/2 flex gap-2">
+                                    <span
+                                        class="text-[10px] font-bold text-gray-600 border border-gray-300 bg-gray-100 px-2 py-1 rounded">IDENTIFIER</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="lg:col-span-4 flex gap-4">
+                            <button onclick="scanDatabase()"
+                                class="flex-1 flex items-center justify-center gap-3 bg-primary border border-primary text-black font-black uppercase tracking-widest text-[11px] py-5 rounded-lg hover:bg-primary/90 transition-all shadow-[0_0_20px_rgba(249,128,6,0.3)]">
+                                <span class="material-symbols-outlined text-lg">travel_explore</span>
+                                Scan Database
+                            </button>
+                            <button onclick="clearSearch()"
+                                class="px-5 border border-gray-300 bg-gray-100 text-gray-600 hover:text-primary hover:border-primary/40 transition-all rounded-lg">
+                                <span class="material-symbols-outlined">filter_alt_off</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stats Section -->
+                <div class="grid grid-cols-12 gap-6">
+                    <!-- Main Stats Card -->
+                    <div class="col-span-12 lg:col-span-7 space-y-6">
+                        <div
+                            class="rounded-xl border border-gray-200 bg-white p-8 shadow-sm relative overflow-hidden group">
+                            <div class="absolute top-0 right-0 p-4">
+                                <span class="text-[10px] tracking-[0.3em] text-primary/40 font-bold uppercase">Nexus
+                                    Core-01</span>
+                            </div>
+                            <!-- Filter Buttons -->
+                            <div class="flex items-center justify-between mb-4 flex-wrap gap-2">
+                                <div class="flex items-center gap-2">
+                                    <span class="h-2 w-2 rounded-full bg-primary orange-glow-pip"></span>
+                                    <p class="text-[10px] font-bold uppercase tracking-widest text-gray-700">Total
+                                        Transaction Volume</p>
+                                </div>
+                                <div class="flex gap-2 flex-wrap" id="volumeFilterBtns">
+                                    <button onclick="filterVolume('today')" class="volume-filter-btn active"
+                                        data-filter="today">
+                                        <span class="material-symbols-outlined text-sm">today</span>
+                                        Hari Ini
+                                    </button>
+                                    <button onclick="filterVolume('month')" class="volume-filter-btn"
+                                        data-filter="month">
+                                        <span class="material-symbols-outlined text-sm">calendar_month</span>
+                                        Bulan Ini
+                                    </button>
+                                    <button onclick="filterVolume('year')" class="volume-filter-btn" data-filter="year">
+                                        <span class="material-symbols-outlined text-sm">date_range</span>
+                                        Tahun Ini
+                                    </button>
+                                    <button onclick="filterVolume('all')" class="volume-filter-btn" data-filter="all">
+                                        <span class="material-symbols-outlined text-sm">all_inclusive</span>
+                                        Semua
+                                    </button>
+                                    <button onclick="toggleCustomDatePicker()" class="volume-filter-btn"
+                                        data-filter="custom">
+                                        <span class="material-symbols-outlined text-sm">edit_calendar</span>
+                                        Pilih Tanggal
+                                    </button>
+                                </div>
+                            </div>
+                            <!-- Custom Date Picker -->
+                            <div id="customDatePicker"
+                                class="hidden mb-4 p-4 bg-gray-50 rounded-lg border border-gray-200">
+                                <div class="flex items-end gap-4 flex-wrap">
+                                    <div>
+                                        <label
+                                            class="block text-[10px] font-bold uppercase tracking-wider text-gray-600 mb-1">Dari
+                                            Tanggal</label>
+                                        <input type="date" id="dateFrom"
+                                            class="px-3 py-2 text-sm border border-gray-300 rounded-lg bg-white text-gray-900 focus:ring-2 focus:ring-primary focus:border-primary" />
+                                    </div>
+                                    <div>
+                                        <label
+                                            class="block text-[10px] font-bold uppercase tracking-wider text-gray-600 mb-1">Sampai
+                                            Tanggal</label>
+                                        <input type="date" id="dateTo"
+                                            class="px-3 py-2 text-sm border border-gray-300 rounded-lg bg-white text-gray-900 focus:ring-2 focus:ring-primary focus:border-primary" />
+                                    </div>
+                                    <button onclick="applyCustomDateFilter()"
+                                        class="px-4 py-2 bg-primary text-white font-bold text-sm rounded-lg hover:bg-primary/90 transition-colors flex items-center gap-2">
+                                        <span class="material-symbols-outlined text-sm">filter_alt</span>
+                                        Terapkan
+                                    </button>
+                                </div>
+                            </div>
+                            <!-- Period Label -->
+                            <p class="text-xs text-gray-500 mb-2" id="volumePeriodLabel">Periode: Hari Ini</p>
+                            <h2 class="text-5xl font-black text-gray-900 italic" id="statTotalNominal">Rp 0</h2>
+                            <!-- Reset Timer -->
+                            <p class="text-[10px] text-gray-400 mt-2" id="resetTimer">Reset otomatis dalam: --:--:--</p>
+                            <div class="mt-8 h-48 w-full">
+                                <svg class="h-full w-full" preserveAspectRatio="none" viewBox="0 0 1000 300">
+                                    <defs>
+                                        <linearGradient id="chartGrad" x1="0" x2="0" y1="0" y2="1">
+                                            <stop offset="0%" stop-color="#f98006" stop-opacity="0.2"></stop>
+                                            <stop offset="100%" stop-color="#f98006" stop-opacity="0"></stop>
+                                        </linearGradient>
+                                    </defs>
+                                    <path
+                                        d="M0,250 Q100,240 200,180 T400,120 T600,160 T800,40 T1000,80 L1000,300 L0,300 Z"
+                                        fill="url(#chartGrad)"></path>
+                                    <path class="orange-laser-line"
+                                        d="M0,250 Q100,240 200,180 T400,120 T600,160 T800,40 T1000,80" fill="none"
+                                        stroke="#f98006" stroke-linecap="round" stroke-width="2"></path>
+                                </svg>
+                            </div>
+                        </div>
+
+                        <!-- Small Stats Cards -->
+                        <div class="grid grid-cols-2 gap-6">
+                            <div
+                                class="rounded-xl border border-gray-200 bg-white p-6 shadow-sm flex items-center justify-between">
+                                <div>
+                                    <p class="text-[10px] font-bold text-gray-700 uppercase tracking-widest">Active
+                                        Coupons</p>
+                                    <h3 class="text-3xl font-black text-gray-900 mt-1" id="statActiveCoupons">0</h3>
+                                </div>
+                                <span
+                                    class="material-symbols-outlined text-primary text-4xl opacity-40">confirmation_number</span>
+                            </div>
+                            <div
+                                class="rounded-xl border border-gray-200 bg-white p-6 shadow-sm flex items-center justify-between">
+                                <div>
+                                    <p class="text-[10px] font-bold text-gray-700 uppercase tracking-widest">Claimed
+                                        Vouchers</p>
+                                    <h3 class="text-3xl font-black text-gray-900 mt-1" id="statClaimedVouchers">0</h3>
+                                </div>
+                                <span class="material-symbols-outlined text-primary text-4xl opacity-40">loyalty</span>
+                            </div>
+                        </div>
+
+                        <!-- Additional Stats -->
+                        <div class="grid grid-cols-4 gap-4">
+                            <div class="rounded-xl border border-gray-200 bg-white p-4 shadow-sm">
+                                <p class="text-[9px] font-bold text-gray-700 uppercase tracking-widest">Kupon Hari Ini
+                                </p>
+                                <h3 class="text-2xl font-black text-gray-900 mt-1" id="statTodayTrx">0</h3>
+                            </div>
+                            <div class="rounded-xl border border-gray-200 bg-white p-4 shadow-sm">
+                                <p class="text-[9px] font-bold text-gray-700 uppercase tracking-widest">Total Kupon</p>
+                                <h3 class="text-2xl font-black text-gray-900 mt-1" id="statTotalKupon">0</h3>
+                            </div>
+                            <div class="rounded-xl border border-gray-200 bg-white p-4 shadow-sm">
+                                <p class="text-[9px] font-bold text-gray-700 uppercase tracking-widest">Voucher Besar
+                                </p>
+                                <h3 class="text-2xl font-black text-primary mt-1" id="statVoucherBesar">0</h3>
+                            </div>
+                            <div class="rounded-xl border border-gray-200 bg-white p-4 shadow-sm">
+                                <p class="text-[9px] font-bold text-gray-700 uppercase tracking-widest">Voucher Sedang
+                                </p>
+                                <h3 class="text-2xl font-black text-primary mt-1" id="statVoucherSedang">0</h3>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Panel -->
+                    <div class="col-span-12 lg:col-span-5 space-y-6">
+                        <!-- Live Notifications -->
+                        <div class="rounded-xl border border-gray-200 bg-white p-6 shadow-sm h-[400px] flex flex-col">
+                            <div class="flex items-center justify-between mb-6">
+                                <div class="flex items-center gap-2">
+                                    <span class="h-2 w-2 rounded-full bg-primary orange-glow-pip animate-pulse"></span>
+                                    <h3 class="text-[11px] font-black uppercase tracking-[0.3em] text-gray-900">Live
+                                        Notifikasi</h3>
+                                </div>
+                                <button onclick="clearNotifications()"
+                                    class="text-[10px] font-bold text-primary uppercase hover:text-primary/80 transition-colors">Clear
+                                    All</button>
+                            </div>
+                            <div class="space-y-4 overflow-y-auto scrollbar-hide pr-2 flex-1" id="notificationList">
+                                <div class="p-3 border-l-2 border-primary/40 bg-gray-50 flex gap-4 items-start">
+                                    <span class="material-symbols-outlined text-primary text-lg">database</span>
+                                    <div>
+                                        <p class="text-[11px] font-bold text-gray-900 uppercase tracking-wider">System
+                                            Ready</p>
+                                        <p class="text-[10px] text-gray-600 mt-0.5">Vanguard Terminal initialized
+                                            successfully</p>
+                                    </div>
+                                    <span class="text-[8px] text-gray-500 ml-auto font-bold uppercase">Just Now</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Live Activity -->
+                        <div class="rounded-xl border border-gray-200 bg-white p-6 shadow-sm h-[380px] flex flex-col">
+                            <div class="flex items-center justify-between mb-6">
+                                <div class="flex items-center gap-2">
+                                    <span
+                                        class="h-2 w-2 rounded-full bg-blue-400 shadow-[0_0_8px_rgba(96,165,250,0.8)] animate-pulse"></span>
+                                    <h3 class="text-[11px] font-black uppercase tracking-[0.3em] text-gray-900">Live
+                                        Aktivitas</h3>
+                                </div>
+                                <span class="text-[9px] font-bold text-gray-600 uppercase">Stream: Active</span>
+                            </div>
+                            <div class="space-y-6 overflow-y-auto scrollbar-hide pr-2 flex-1" id="activityList">
+                                <div class="flex gap-4 group">
+                                    <div class="relative shrink-0">
+                                        <div
+                                            class="size-8 rounded-full bg-primary/20 ring-1 ring-gray-200 flex items-center justify-center">
+                                            <span class="text-primary text-xs font-bold" id="activityAvatar">A</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex-1 border-b border-gray-200 pb-3">
+                                        <div class="flex items-center justify-between">
+                                            <p class="text-[10px] font-bold text-gray-900 uppercase"
+                                                id="activityUserName">
+                                                Admin</p>
+                                            <span class="text-[8px] text-primary font-bold">ACTIVE</span>
+                                        </div>
+                                        <p class="text-[10px] text-gray-600 mt-1 italic">Logged into Vanguard Terminal
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer -->
+                <footer
+                    class="rounded border border-gray-200 bg-white p-4 flex items-center justify-between mt-auto shadow-sm">
+                    <div class="flex items-center gap-8">
+                        <div class="flex items-center gap-2">
+                            <span class="h-1.5 w-1.5 rounded-full bg-primary orange-glow-pip"></span>
+                            <span class="text-[10px] font-bold uppercase tracking-widest text-gray-700">Core Node
+                                Alpha: Operational</span>
+                        </div>
+                        <div class="h-4 w-px bg-gray-300"></div>
+                        <div class="flex items-center gap-2">
+                            <span class="text-[10px] font-bold uppercase tracking-widest text-gray-700">Latency:
+                                0.04ms</span>
+                        </div>
+                        <div class="h-4 w-px bg-gray-300"></div>
+                        <div class="flex items-center gap-2">
+                            <span class="text-[10px] font-bold uppercase tracking-widest text-gray-600"
+                                id="customerCount">Registered Buyers: 0</span>
+                        </div>
+                    </div>
+                    <div class="text-[10px] font-bold uppercase tracking-[0.4em] text-primary/80">
+                        © ND GROUP TERMINAL V2.0.44 • ELITE ENCRYPTED CHANNEL
+                    </div>
+                </footer>
+            </div>
+        </main>
+    </div>
+
+    <script src="../js/database.js"></script>
+    <script src="../js/utils.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script>
+        // Clock functionality
+        function updateClock() {
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            const months = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
+            const day = String(now.getDate()).padStart(2, '0');
+            const month = months[now.getMonth()];
+            const year = now.getFullYear();
+            document.getElementById('vanguard-clock').textContent = `${hours}:${minutes}:${seconds}`;
+            document.getElementById('vanguard-date').textContent = `${month} ${day} ${year}`;
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function () {
+            const session = Utils.requireAuth('admin');
+            if (!session) return;
+
+            // Set user info
+            document.getElementById('headerUserName').textContent = session.username;
+            document.getElementById('headerUserAvatar').textContent = session.username.charAt(0).toUpperCase();
+            document.getElementById('activityUserName').textContent = session.username;
+            document.getElementById('activityAvatar').textContent = session.username.charAt(0).toUpperCase();
+
+            loadStats();
+            loadStoreFilter();
+
+            // Add notification for login
+            addActivity(session.username, 'Logged into Vanguard Terminal', 'ACTIVE');
+
+            // Setup terminal search
+            document.getElementById('terminalSearch').addEventListener('input', Utils.debounce(handleTerminalSearch, 300));
+
+            // Setup notification button
+            document.getElementById('notificationBtn').addEventListener('click', function () {
+                addNotification('info', 'Notifications', 'All notifications are displayed in the panel below');
+            });
+
+            // Setup settings button
+            document.getElementById('settingsBtn').addEventListener('click', function () {
+                addNotification('info', 'Settings', 'Settings panel coming soon...');
+            });
+        });
+
+        // Current volume filter
+        let currentVolumeFilter = 'today';
+
+        function loadStats(filter = currentVolumeFilter) {
+            const stats = DB.getStats();
+            // Only count vouchers that have been activated by buyer (status = 'active')
+            // Not counting cashier input (pending coupons)
+            const vouchers = DB.getAll('vouchers').filter(v => v.status === 'active');
+            const transactions = DB.getAll('transactions');
+
+            // Calculate filtered volume based on period
+            const now = new Date();
+            const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+            const thisMonth = new Date(now.getFullYear(), now.getMonth(), 1);
+            const thisYear = new Date(now.getFullYear(), 0, 1);
+
+            let filteredVolume = 0;
+            let periodLabel = '';
+
+            // Track processed transaction IDs to avoid double counting
+            const processedTransactionIds = new Set();
+
+            vouchers.forEach(v => {
+                // Get the related transaction to get the nominal
+                const transaction = transactions.find(t => t.id === v.transaction_id);
+                if (!transaction || !transaction.nominal) return;
+
+                // Avoid double counting for same transaction (multiple vouchers per transaction)
+                if (processedTransactionIds.has(transaction.id)) return;
+                processedTransactionIds.add(transaction.id);
+
+                const voucherDate = new Date(v.updated_at || v.created_at);
+
+                switch (filter) {
+                    case 'today':
+                        if (voucherDate >= today) filteredVolume += transaction.nominal;
+                        break;
+                    case 'month':
+                        if (voucherDate >= thisMonth) filteredVolume += transaction.nominal;
+                        break;
+                    case 'year':
+                        if (voucherDate >= thisYear) filteredVolume += transaction.nominal;
+                        break;
+                    case 'all':
+                    default:
+                        filteredVolume += transaction.nominal;
+                        break;
+                }
+            });
+
+            // Set period label
+            const months = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+            switch (filter) {
+                case 'today':
+                    periodLabel = `Hari Ini (${now.getDate()} ${months[now.getMonth()]} ${now.getFullYear()})`;
+                    break;
+                case 'month':
+                    periodLabel = `Bulan Ini (${months[now.getMonth()]} ${now.getFullYear()})`;
+                    break;
+                case 'year':
+                    periodLabel = `Tahun Ini (${now.getFullYear()})`;
+                    break;
+                case 'all':
+                    periodLabel = 'Semua Waktu';
+                    break;
+            }
+
+            document.getElementById('statTotalNominal').textContent = Utils.formatCurrency(filteredVolume);
+            document.getElementById('volumePeriodLabel').textContent = `Periode: ${periodLabel}`;
+            document.getElementById('statActiveCoupons').textContent = stats.totalTransactions.toLocaleString();
+            document.getElementById('statClaimedVouchers').textContent = stats.activeVouchers.toLocaleString();
+            document.getElementById('statTodayTrx').textContent = stats.todayTransactions;
+            document.getElementById('statTotalKupon').textContent = stats.totalTransactions;
+            document.getElementById('statVoucherBesar').textContent = stats.voucherBesar;
+            document.getElementById('statVoucherSedang').textContent = stats.voucherSedang;
+            document.getElementById('customerCount').textContent = `Registered Buyers: ${stats.totalCustomers}`;
+
+            // Update reset timer
+            updateResetTimer();
+        }
+
+        function filterVolume(filter) {
+            currentVolumeFilter = filter;
+
+            // Hide custom date picker when selecting preset filters
+            if (filter !== 'custom') {
+                document.getElementById('customDatePicker').classList.add('hidden');
+            }
+
+            // Update button active states
+            document.querySelectorAll('.volume-filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.dataset.filter === filter) {
+                    btn.classList.add('active');
+                }
+            });
+
+            // Reload stats with new filter
+            loadStats(filter);
+
+            // Show notification
+            const filterNames = { today: 'Hari Ini', month: 'Bulan Ini', year: 'Tahun Ini', all: 'Semua Waktu', custom: 'Tanggal Kustom' };
+            addNotification('info', 'Filter Updated', `Menampilkan volume transaksi: ${filterNames[filter]}`);
+        }
+
+        function toggleCustomDatePicker() {
+            const picker = document.getElementById('customDatePicker');
+            picker.classList.toggle('hidden');
+
+            // Update button active state
+            document.querySelectorAll('.volume-filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.dataset.filter === 'custom') {
+                    btn.classList.add('active');
+                }
+            });
+
+            // Set default dates
+            const today = new Date();
+            const dateFrom = document.getElementById('dateFrom');
+            const dateTo = document.getElementById('dateTo');
+
+            if (!dateFrom.value) {
+                dateFrom.value = today.toISOString().split('T')[0];
+            }
+            if (!dateTo.value) {
+                dateTo.value = today.toISOString().split('T')[0];
+            }
+        }
+
+        function applyCustomDateFilter() {
+            const dateFromInput = document.getElementById('dateFrom').value;
+            const dateToInput = document.getElementById('dateTo').value;
+
+            if (!dateFromInput || !dateToInput) {
+                addNotification('warning', 'Input Required', 'Pilih tanggal Dari dan Sampai');
+                return;
+            }
+
+            const dateFrom = new Date(dateFromInput);
+            const dateTo = new Date(dateToInput);
+            dateTo.setHours(23, 59, 59, 999); // Include entire end date
+
+            if (dateFrom > dateTo) {
+                addNotification('error', 'Invalid Date', 'Tanggal Dari harus sebelum tanggal Sampai');
+                return;
+            }
+
+            currentVolumeFilter = 'custom';
+
+            // Calculate custom filtered volume
+            const vouchers = DB.getAll('vouchers').filter(v => v.status === 'active');
+            const transactions = DB.getAll('transactions');
+
+            let filteredVolume = 0;
+            const processedTransactionIds = new Set();
+
+            vouchers.forEach(v => {
+                const transaction = transactions.find(t => t.id === v.transaction_id);
+                if (!transaction || !transaction.nominal) return;
+
+                if (processedTransactionIds.has(transaction.id)) return;
+                processedTransactionIds.add(transaction.id);
+
+                const voucherDate = new Date(v.updated_at || v.created_at);
+
+                if (voucherDate >= dateFrom && voucherDate <= dateTo) {
+                    filteredVolume += transaction.nominal;
+                }
+            });
+
+            // Format period label
+            const formatDate = (d) => d.toLocaleDateString('id-ID', { day: '2-digit', month: 'short', year: 'numeric' });
+            const periodLabel = `${formatDate(dateFrom)} - ${formatDate(dateTo)}`;
+
+            document.getElementById('statTotalNominal').textContent = Utils.formatCurrency(filteredVolume);
+            document.getElementById('volumePeriodLabel').textContent = `Periode: ${periodLabel}`;
+
+            addNotification('success', 'Custom Filter Applied', `Menampilkan volume: ${periodLabel}`);
+        }
+
+        function updateResetTimer() {
+            const now = new Date();
+            const midnight = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1, 0, 0, 0);
+            const diff = midnight - now;
+
+            const hours = Math.floor(diff / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+            const timerEl = document.getElementById('resetTimer');
+            if (timerEl) {
+                timerEl.textContent = `Reset otomatis dalam: ${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+            }
+        }
+
+        // Combined interval for better performance - runs every second but does heavy work less often
+        let lastVoucherCount = 0;
+        let tickCounter = 0;
+        setInterval(() => {
+            tickCounter++;
+
+            // Update timer every second (lightweight)
+            updateResetTimer();
+
+            // Check midnight reset every second
+            const now = new Date();
+            if (now.getHours() === 0 && now.getMinutes() === 0 && now.getSeconds() < 2) {
+                if (currentVolumeFilter === 'today') {
+                    loadStats('today');
+                    addNotification('info', 'Auto Reset', 'Volume transaksi hari ini telah direset');
+                }
+            }
+
+            // Real-time auto-refresh stats every 30 seconds (reduced from 5 seconds for better performance)
+            if (tickCounter % 30 === 0) {
+                const currentVoucherCount = DB.getAll('vouchers').filter(v => v.status === 'active').length;
+                if (currentVoucherCount !== lastVoucherCount) {
+                    lastVoucherCount = currentVoucherCount;
+                    loadStats();
+                    addNotification('success', 'Real-time Update', 'Volume transaksi diperbarui');
+                }
+            }
+        }, 1000);
+
+        function loadStoreFilter() {
+            const kasirs = DB.findBy('users', 'role', 'kasir');
+            const stores = [...new Set(kasirs.map(k => k.toko_name).filter(Boolean))];
+            const select = document.getElementById('storeFilter');
+
+            stores.forEach(store => {
+                const option = document.createElement('option');
+                option.value = store;
+                option.textContent = store.toUpperCase();
+                select.appendChild(option);
+            });
+        }
+
+        function scanDatabase() {
+            const nik = document.getElementById('nikSearch').value.trim();
+            if (!nik) {
+                addNotification('warning', 'Input Required', 'Please enter a NIK to search');
+                return;
+            }
+
+            addNotification('info', 'NIK Query Initialized', `Searching NIK: ${nik.substring(0, 12)}... in global registry`);
+
+            // Search customers by NIK
+            const customers = DB.getAll('customers').filter(c => c.nik && c.nik.includes(nik));
+
+            if (customers.length > 0) {
+                addNotification('success', 'NIK Found', `Found ${customers.length} record(s) matching NIK`);
+                addActivity('System', `NIK search completed: ${customers.length} results`, 'COMPLETED');
+
+                // Display search results in a modal
+                showSearchResults(customers);
+            } else {
+                addNotification('error', 'No Results', 'No records found for this NIK');
+                addActivity('System', 'NIK search returned no results', 'EMPTY');
+            }
+        }
+
+        function showSearchResults(customers) {
+            // Create modal for search results
+            const existingModal = document.getElementById('searchResultsModal');
+            if (existingModal) existingModal.remove();
+
+            const modal = document.createElement('div');
+            modal.id = 'searchResultsModal';
+            modal.className = 'fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4';
+            modal.onclick = (e) => { if (e.target === modal) modal.remove(); };
+
+            const resultsHTML = customers.map(c => {
+                // Get all transactions for this customer (by customer_id or by NIK match)
+                const allTransactions = DB.getAll('transactions');
+                const customerTransactions = allTransactions.filter(t =>
+                    t.customer_id === c.id || t.nik === c.nik
+                );
+
+                // Get vouchers linked to customer
+                const allVouchers = DB.getAll('vouchers');
+                const vouchers = allVouchers.filter(v =>
+                    v.customer_id === c.id ||
+                    customerTransactions.some(t => t.id === v.transaction_id)
+                );
+
+                // Transform transactions to coupon-like objects for display
+                // Since coupons data might be stored in transactions
+                const coupons = customerTransactions.map(t => ({
+                    kode_kupon: t.kode_kupon || t.coupon_code || `TRX-${t.id?.substring(0, 8)}`,
+                    no_transaksi: t.no_transaksi || t.id,
+                    nominal: t.nominal || 0,
+                    toko_name: t.toko_name || 'Toko',
+                    status: t.is_claimed ? 'claimed' : 'pending',
+                    created_at: t.created_at
+                }));
+
+                // Generate voucher list HTML
+                const voucherListHTML = vouchers.length > 0 ? vouchers.map(v => `
+                    <div class="flex items-center justify-between p-3 bg-white border border-gray-200 rounded-lg">
+                        <div class="flex items-center gap-3">
+                            <div class="size-10 rounded-lg ${v.tipe_hadiah === 'BESAR' ? 'bg-primary/20' : 'bg-blue-100'} flex items-center justify-center">
+                                <span class="material-symbols-outlined ${v.tipe_hadiah === 'BESAR' ? 'text-primary' : 'text-blue-600'} text-lg">${v.tipe_hadiah === 'BESAR' ? 'emoji_events' : 'card_giftcard'}</span>
+                            </div>
+                            <div>
+                                <p class="font-bold text-gray-900 text-sm">${v.kode_voucher}</p>
+                                <p class="text-xs text-gray-500">Hadiah ${v.tipe_hadiah}</p>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <span class="inline-flex px-2 py-1 text-xs font-bold rounded ${v.status === 'active' ? 'bg-green-100 text-green-700' : 'bg-yellow-100 text-yellow-700'}">${v.status === 'active' ? 'Aktif' : 'Pending'}</span>
+                            <p class="text-xs text-gray-500 mt-1">${v.created_at ? Utils.formatDateShort(v.created_at) : '-'}</p>
+                        </div>
+                    </div>
+                `).join('') : '<p class="text-gray-500 text-sm text-center py-4">Belum ada voucher</p>';
+
+                // Generate coupon list HTML with kode_kupon and no_transaksi
+                const couponListHTML = coupons.length > 0 ? coupons.map(cp => `
+                    <div class="p-3 bg-white border border-gray-200 rounded-lg">
+                        <div class="flex items-center justify-between mb-2">
+                            <div class="flex items-center gap-3">
+                                <div class="size-10 rounded-lg bg-purple-100 flex items-center justify-center shrink-0">
+                                    <span class="material-symbols-outlined text-purple-600 text-lg">confirmation_number</span>
+                                </div>
+                                <div>
+                                    <p class="font-bold text-gray-900 text-sm">${cp.kode_kupon || '-'}</p>
+                                    <p class="text-xs text-gray-500">${cp.toko_name || 'Toko'}</p>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <span class="inline-flex px-2 py-1 text-xs font-bold rounded ${cp.status === 'claimed' ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-700'}">${cp.status === 'claimed' ? 'Diklaim' : cp.status || 'Pending'}</span>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-3 gap-2 text-xs bg-gray-50 rounded-lg p-2 mt-2">
+                            <div>
+                                <span class="text-gray-500">No. Transaksi</span>
+                                <p class="font-bold text-gray-900">${cp.no_transaksi || '-'}</p>
+                            </div>
+                            <div>
+                                <span class="text-gray-500">Nominal</span>
+                                <p class="font-bold text-primary">Rp ${(cp.nominal || 0).toLocaleString('id-ID')}</p>
+                            </div>
+                            <div>
+                                <span class="text-gray-500">Tanggal</span>
+                                <p class="font-semibold text-gray-900">${cp.created_at ? Utils.formatDateShort(cp.created_at) : '-'}</p>
+                            </div>
+                        </div>
+                    </div>
+                `).join('') : '<p class="text-gray-500 text-sm text-center py-4">Belum ada kupon</p>';
+
+                return `
+                    <div class="border border-gray-200 rounded-xl overflow-hidden">
+                        <!-- Customer Identity Card -->
+                        <div class="p-5 bg-gradient-to-r from-primary/10 to-transparent">
+                            <div class="flex items-start gap-4">
+                                <div class="size-16 rounded-full bg-primary/20 flex items-center justify-center shrink-0">
+                                    <span class="text-primary font-bold text-2xl">${c.nama ? c.nama.charAt(0).toUpperCase() : '?'}</span>
+                                </div>
+                                <div class="flex-1">
+                                    <h4 class="text-xl font-bold text-gray-900">${c.nama || '-'}</h4>
+                                    <p class="text-sm text-gray-600 font-mono mt-1">${c.nik || '-'}</p>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4 text-sm">
+                                <div class="bg-white/80 rounded-lg p-3">
+                                    <span class="text-gray-500 text-xs uppercase tracking-wider">No. Telepon</span>
+                                    <p class="font-semibold text-gray-900 mt-1">${c.no_telepon || '-'}</p>
+                                </div>
+                                <div class="bg-white/80 rounded-lg p-3">
+                                    <span class="text-gray-500 text-xs uppercase tracking-wider">Alamat</span>
+                                    <p class="font-semibold text-gray-900 mt-1">${c.alamat || '-'}</p>
+                                </div>
+                                <div class="bg-white/80 rounded-lg p-3">
+                                    <span class="text-gray-500 text-xs uppercase tracking-wider">Total Kupon</span>
+                                    <p class="font-bold text-primary text-lg mt-1">${coupons.length}</p>
+                                </div>
+                                <div class="bg-white/80 rounded-lg p-3">
+                                    <span class="text-gray-500 text-xs uppercase tracking-wider">Total Voucher</span>
+                                    <p class="font-bold text-primary text-lg mt-1">${vouchers.length}</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Voucher List -->
+                        <div class="p-5 border-t border-gray-200">
+                            <h5 class="text-sm font-bold text-gray-900 uppercase tracking-wider mb-3 flex items-center gap-2">
+                                <span class="material-symbols-outlined text-primary text-lg">loyalty</span>
+                                Daftar Voucher (${vouchers.length})
+                            </h5>
+                            <div class="space-y-2 max-h-48 overflow-y-auto">
+                                ${voucherListHTML}
+                            </div>
+                        </div>
+                        
+                        <!-- Coupon List -->
+                        <div class="p-5 border-t border-gray-200 bg-gray-50">
+                            <h5 class="text-sm font-bold text-gray-900 uppercase tracking-wider mb-3 flex items-center gap-2">
+                                <span class="material-symbols-outlined text-purple-600 text-lg">confirmation_number</span>
+                                Daftar Kupon (${coupons.length})
+                            </h5>
+                            <div class="space-y-2 max-h-48 overflow-y-auto">
+                                ${couponListHTML}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            modal.innerHTML = `
+                <div class="bg-white rounded-xl shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-hidden">
+                    <div class="p-6 border-b border-gray-200 flex items-center justify-between bg-gray-50">
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-900">Hasil Pencarian NIK</h3>
+                            <p class="text-sm text-gray-600">Ditemukan ${customers.length} data customer</p>
+                        </div>
+                        <button onclick="document.getElementById('searchResultsModal').remove()" 
+                            class="size-10 rounded-full bg-gray-200 hover:bg-gray-300 flex items-center justify-center transition-colors">
+                            <span class="material-symbols-outlined">close</span>
+                        </button>
+                    </div>
+                    <div class="p-6 space-y-6 overflow-y-auto max-h-[75vh]">
+                        ${resultsHTML}
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(modal);
+        }
+
+        function clearSearch() {
+            document.getElementById('nikSearch').value = '';
+            const modal = document.getElementById('searchResultsModal');
+            if (modal) modal.remove();
+            addNotification('info', 'Filter Cleared', 'Search filter has been reset');
+        }
+
+        function handleTerminalSearch(e) {
+            const query = e.target.value.trim();
+            if (query.length >= 3) {
+                addNotification('info', 'Terminal Search', `Searching for: ${query}`);
+            }
+        }
+
+        function addNotification(type, title, message) {
+            const colors = {
+                success: 'green-500',
+                error: 'red-500',
+                warning: 'yellow-500',
+                info: 'blue-500'
+            };
+            const icons = {
+                success: 'check_circle',
+                error: 'error',
+                warning: 'warning',
+                info: 'info'
+            };
+
+            const list = document.getElementById('notificationList');
+            const item = document.createElement('div');
+            item.className = `p-3 border-l border-${colors[type]}/40 bg-white/5 flex gap-4 items-start`;
+            item.innerHTML = `
+                <span class="material-symbols-outlined text-${colors[type]} text-lg">${icons[type]}</span>
+                <div>
+                    <p class="text-[11px] font-bold text-white uppercase tracking-wider">${title}</p>
+                    <p class="text-[10px] text-slate-500 mt-0.5">${message}</p>
+                </div>
+                <span class="text-[8px] text-slate-600 ml-auto font-bold uppercase">Just Now</span>
+            `;
+            list.insertBefore(item, list.firstChild);
+
+            // Update notification badge
+            updateNotificationBadge();
+        }
+
+        function clearNotifications() {
+            const list = document.getElementById('notificationList');
+            list.innerHTML = `
+                <div class="p-3 border-l border-primary/40 bg-white/5 flex gap-4 items-start">
+                    <span class="material-symbols-outlined text-primary text-lg">database</span>
+                    <div>
+                        <p class="text-[11px] font-bold text-white uppercase tracking-wider">System Ready</p>
+                        <p class="text-[10px] text-slate-500 mt-0.5">Notifications cleared</p>
+                    </div>
+                    <span class="text-[8px] text-slate-600 ml-auto font-bold uppercase">Just Now</span>
+                </div>
+            `;
+            updateNotificationBadge();
+        }
+
+        function updateNotificationBadge() {
+            const list = document.getElementById('notificationList');
+            const count = list.children.length;
+            const badge = document.getElementById('notificationBadge');
+            if (count > 1) {
+                badge.textContent = count > 9 ? '9+' : count;
+                badge.classList.remove('hidden');
+            } else {
+                badge.classList.add('hidden');
+            }
+        }
+
+        function addActivity(username, action, status) {
+            const list = document.getElementById('activityList');
+            const statusColors = {
+                'ACTIVE': 'text-primary',
+                'COMPLETED': 'text-green-500',
+                'SEARCHING': 'text-blue-500',
+                'EMPTY': 'text-slate-500'
+            };
+
+            const item = document.createElement('div');
+            item.className = 'flex gap-4 group';
+            item.innerHTML = `
+                <div class="relative shrink-0">
+                    <div class="size-8 rounded-full bg-primary/20 ring-1 ring-white/10 flex items-center justify-center">
+                        <span class="text-primary text-xs font-bold">${username.charAt(0).toUpperCase()}</span>
+                    </div>
+                </div>
+                <div class="flex-1 border-b border-white/5 pb-3">
+                    <div class="flex items-center justify-between">
+                        <p class="text-[10px] font-bold text-white uppercase">${username}</p>
+                        <span class="text-[8px] ${statusColors[status] || 'text-primary'} font-bold">${status}</span>
+                    </div>
+                    <p class="text-[10px] text-slate-400 mt-1 italic">${action}</p>
+                </div>
+            `;
+            list.insertBefore(item, list.firstChild);
+
+            // Keep only last 10 activities
+            while (list.children.length > 10) {
+                list.removeChild(list.lastChild);
+            }
+        }
+
+        function exportExcel(type) {
+            const result = DB.exportVouchersForStore({ type });
+
+            if (!result.data.length) {
+                addNotification('warning', 'Export Failed', `No ${type} voucher data to export`);
+                return;
+            }
+
+            const dateStr = new Date().toISOString().split('T')[0];
+            const safeTokoName = result.tokoName.replace(/\s+/g, '_');
+            const filename = `Laporan_Voucher_${safeTokoName}_${type}_${dateStr}`;
+
+            Utils.exportToExcelStyled(result.data, filename, result.columnTypes);
+            addNotification('success', 'Export Success', `${type} report generated: ${filename}.xlsx`);
+            addActivity('System', `Generated Export for Hadiah ${type}`, 'COMPLETED');
+        }
+
+        function logout() {
+            DB.logout();
+            window.location.href = 'login.html';
+        }
+    </script>
+</body>
+
+</html>
